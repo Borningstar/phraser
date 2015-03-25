@@ -1,15 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var phraseSchema = new Schema({
-	name: String,
-  	words: [{	id: { type: String, index: true },
-  		list: [String],
-  		enabled: { type: bool, default: true },
-  		next: [String] }],
-	lists: [{	id:  type: String, index: true },
-		list: [String] }]
-});
+var phraseSchema = new Schema(
+	{
+		name: String,
+	  	words: [{	id: { type: String, index: true },
+			  		list: [String],
+			  		enabled: { type: Boolean, default: true },
+			  		next: [String] }],
+		lists: [{	id:  {type: String, index: true },
+					list: [String] }]
+	}
+);
 
 phraseSchema.methods.getWords = function (id) {
 	var word = null;
@@ -34,6 +36,7 @@ phraseSchema.methods.getNext = function (id) {
 				var nextIndex = Math.floor(Math.random() * nextList.length);
 				next = this.words[wordIndex].next[nextIndex];
 				break;
+			}
 		}
 	}
 	return next;
