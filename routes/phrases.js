@@ -1,11 +1,12 @@
 var express = require('express');
+var phraseGenerator = require('../controllers/phraseGenerator')
 var router = express.Router();
 
 var Phrase = require('../models/phrase');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
+/*
 	var newPhrase = new Phrase ({name: "InsultPraise"});
 
 	newPhrase.words.push({	id: "greeting",
@@ -33,18 +34,20 @@ router.get('/', function(req, res, next) {
 			console.log(Phrase);
 		};
   	})
+*/
 
-	var Phrases;
-	var query = Phrase.find()
-					.exec(function (err, results){
-						if (err) {
-				    		console.log("Error getting Phrases: " + err)
-						} 
-						else {
-							Phrases = results;
-							res.json(Phrases);
-						};				
-					});
+	var phrase;
+
+	query = Phrase.findOne({'name' : 'InsultPraise'})
+	.exec(function (err, results){
+		if (err) {
+    		console.log("Error getting phrase: " + err)
+		} 
+		else {
+			phrase = results;
+			res.json(phrase.getWords('greeting'));
+		};				
+	});
 });
 
 router.put('/', function(req, res){

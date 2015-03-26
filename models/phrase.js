@@ -15,12 +15,20 @@ var phraseSchema = new Schema(
 
 phraseSchema.methods.getWords = function (id) {
 	var word = null;
-	var words = this.words[id].list;
+	var words = [];
 
-	if (this.words[id].enabled){
-		var wordIndex = Math.floor(Math.random() * words.length);
-		word = words[wordIndex];
+	for (var i = 0; i < this.words.length; i++){
+		if (this.words[i].id == id || id == i){
+			words = this.words[i].list;
+
+			if (this.words[i].enabled){
+				var wordIndex = Math.floor(Math.random() * words.length);
+				word = words[wordIndex];
+			}
+			break;
+		}
 	}
+
 	return word;
 };
 

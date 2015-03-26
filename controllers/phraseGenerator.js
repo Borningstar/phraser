@@ -1,4 +1,4 @@
-function generatePhrase (phraseModel) {
+var phraseGenerator = function (phraseModel) {
 	var current = 0;
 	var next = phraseModel.getNext(current);
 	var phrase = phraseModel.getWord(current);
@@ -15,3 +15,5 @@ function generatePhrase (phraseModel) {
 
 	return phrase;
 }
+
+module.exports = phraseGenerator;
