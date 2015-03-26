@@ -7,7 +7,7 @@ var phraseGenerator = function (phraseModel) {
 		current = next;
 		if (current){
 			phrase += phraseModel.getWord(current);
-			next = sentence.getNext(current);	
+			next = phraseModel.getNext(current);	
 		} else {
 			break;
 		}

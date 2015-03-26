@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 			 				next: ["2"]});
 
 	newPhrase.words.push({	id: "2",
-			 				list: [", you are a"],
+			 				list: [", you are a "],
 			 				next: ["insult", "praise"]});
 
 	newPhrase.words.push({	id: "insult",
@@ -38,14 +38,14 @@ router.get('/', function(req, res, next) {
 
 	var phrase;
 
-	query = Phrase.findOne({'name' : 'InsultPraise'})
+	query = Phrase.findOne({'name' : 'InsultPraise2'})
 	.exec(function (err, results){
 		if (err) {
     		console.log("Error getting phrase: " + err)
 		} 
 		else {
 			phrase = results;
-			res.json(phrase.getWords('greeting'));
+			res.json(phraseGenerator(phrase));
 		};				
 	});
 });

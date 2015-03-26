@@ -13,7 +13,7 @@ var phraseSchema = new Schema(
 	}
 );
 
-phraseSchema.methods.getWords = function (id) {
+phraseSchema.methods.getWord = function (id) {
 	var word = null;
 	var words = [];
 
@@ -34,19 +34,21 @@ phraseSchema.methods.getWords = function (id) {
 
 phraseSchema.methods.getNext = function (id) {
 	var next = null;
-	var nextList = this.words.next;
-	var words = this.words.words;	
+	var nextList = [];
+	var words = [];
 
-	if (this.words[id].enabled){
-		for (var i = 0; i < nextList.length; i++){
-			var wordIndex = Math.floor(Math.random() * wordList.length);
-			if (this.words[wordIndex].enabled){
+	for (var i = 0; i < this.words.length; i++){
+		if (this.words[i].id == id || id == i){
+			nextList = this.words[i].next;
+
+			if (this.words[i].enabled){
 				var nextIndex = Math.floor(Math.random() * nextList.length);
-				next = this.words[wordIndex].next[nextIndex];
-				break;
+				next = nextList[nextIndex];
 			}
+			break;
 		}
 	}
+
 	return next;
 };
 
